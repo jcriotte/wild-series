@@ -19,7 +19,7 @@ class ProgramController extends AbstractController
         ]);
     }
     /**
-     * @Route("/program/{page}", methods={"GET"}, name="progrem_show", requirements={"page"="\d+"})
+     * @Route("/program/{page}", methods={"GET"}, name="program_show", requirements={"page"="\d+"})
      */
     public function show(int $page): Response
     {
