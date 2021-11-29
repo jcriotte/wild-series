@@ -1,2 +1,15 @@
 @import "custom";
 @import "~bootstrap/scss/bootstrap";
+
+.navbar {
+    background-color: $secondary;
+}
+
+body {
+    background-color: $primary;
+}
+
+.iconeDuSite {
+    height: 25px !important;
+    width: 25px !important;
+}
