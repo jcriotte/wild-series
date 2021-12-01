@@ -10,9 +10,41 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Request;
+use App\Form\ProgramType;
 
 class ProgramController extends AbstractController
 {
+    /**
+     * The controller for the program add form
+     * 
+     * @Route("/program/new", name="program_new")
+     */
+    public function new(Request $request): Response
+    {
+        //create new program Object
+        $program = new Program();
+        //Create the associated Form
+        $form = $this->createForm(ProgramType::class, $program);
+        // Get data from HTTP request
+        $form->handleRequest($request);
+        // Was the form submitted ?
+        if ($form->isSubmitted()) {
+            // Deal with the submitted data
+            // Get the Entity Manager
+            $entityManager = $this->getDoctrine()->getManager();
+            // Persist Category Object
+            $entityManager->persist($program);
+            // Flush the persisted object
+            $entityManager->flush();
+            // Finally redirect to categories list
+            return $this->redirectToRoute('program_index');
+        }
+
+        // Render the form
+        return $this->render('Program/new.html.twig', ["form" => $form->createView()]);        
+
+    }
     /**
      * @Route("/program/", name="program_index")
      */
