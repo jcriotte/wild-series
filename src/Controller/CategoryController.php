@@ -45,6 +45,7 @@ class CategoryController extends AbstractController
                 'No category with name : ' . $categoryName . ' found in category\'s table.'
             );
         }
+        
         $programs = $this->getDoctrine()
             ->getRepository(Program::class)
             ->findBy(['category' => $category->getId()],
