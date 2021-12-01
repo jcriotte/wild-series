@@ -16,19 +16,13 @@
 			<h2>{{ season.number }}</h2>
 			<p>{{ season.year }}</p>
 		</div>
-		<p>Liste des épisodes</p>
-		{% for episode in episodes %}
-			<div>
-				<h3>Episode
-					{{ episode.number }}
-					:
-					{{ episode.title }}</h3>
-				{# Lien vers la fiche de l'episode : #}
-				<a href="/program/{{ program.id }}/season/{{ season.id }}/episode/{{ episode.id }}">Voir la fiche de l'épisode</a>
-			</div>
-		{% else %}
-			Aucune episode trouvé.
-		{% endfor %}
+		<div>
+			<h3>Episode
+				{{ episode.number }}
+				:
+				{{ episode.title }}</h3>
+            <p>{{ episode.synopsis }}</p>
+		</div>
 	</div>
 
 	<a href="{{ path('program_index') }}">
