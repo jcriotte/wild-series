@@ -23,7 +23,7 @@ class Category
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Field name is required and not null")
-     * @Assert\Length(max="255",message="The name entered {{ value }} is too long,it should not exceed {{ limit }} characters")
+     * @Assert\Length(max="255")
      */
     private $name;
 
