@@ -4,28 +4,30 @@
 {% endblock %}
 
 {% block body %}
-	<div class="media">
-		<div class="media-body">
-			<h1 class="mt-0">{{ category.name }}</h1>
-			<p>Catégorie :
-				{{ category.name }}</p>
-			{% for program in programs %}
-				<div>
-					<h2>{{ loop.index }}
-						/
-						{{ program.title }}
+	<div class="container">
+		<div class="media">
+			<div class="media-body">
+				<h1 class="mt-0">{{ category.name }}</h1>
+				<p>Catégorie :
+					{{ category.name }}</p>
+				{% for program in programs %}
+					<div>
+						<h2>{{ loop.index }}
+							/
+							{{ program.title }}
+						</div>
+						<p>{{ program.summary }}</p>
+						{# Lien vers la fiche de la série : #}
+						<a href="{{ path("program_show", { id: program.id }) }}">Voir la fiche</a>
 					</div>
-					<p>{{ program.summary }}</p>
-					{# Lien vers la fiche de la série : #}
-					<a href="{{ path("program_show", { id: program.id }) }}">Voir la fiche</a>
-				</div>
-			{% else %}
-				Aucune série trouvée.
-			{% endfor %}
+				{% else %}
+					Aucune série trouvée.
+				{% endfor %}
+			</div>
 		</div>
-	</div>
 
-	<a href="{{ path('category_index') }}">
-		Retour à la liste de toutes les catégories
-	</a>
+		<a href="{{ path('category_index') }}">
+			Retour à la liste de toutes les catégories
+		</a>
+	</div>
 {% endblock %}
