@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
 	<div class="container-fluid">
-    <a class="navbar-brand" href="/"><img class="iconeDuSite" src="/build/images/film-roll.png" /></a>
-    <a class="navbar-brand" href="/">Wild Séries</a>
+		<a class="navbar-brand" href="/"><img class="iconeDuSite" src="/build/images/film-roll.png"/></a>
+		<a class="navbar-brand" href="/">Wild Séries</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -12,15 +12,14 @@
 						Catégories
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<li>
-							<a class="dropdown-item" href="#">Action</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="#">Another action</a>
-						</li>
+						{#{% for category in categorys %}
+							<li>
+								<a class="dropdown-item" href="/category/{{ category.id }}">{{ category.name }}</a>
+							</li>
+						{% endfor %}#}
 						<li><hr class="dropdown-divider"></li>
 						<li>
-							<a class="dropdown-item" href="#">Something else here</a>
+							<a class="dropdown-item" href="/category/">Liste de toutes les catégories</a>
 						</li>
 					</ul>
 				</li>
@@ -31,15 +30,14 @@
 						Acteurs
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+						{#{% for actor in actors %}
 						<li>
-							<a class="dropdown-item" href="#">Action</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="#">Another action</a>
-						</li>
+							<a class="dropdown-item" href="/actor/{{ actor.id }}">{{ actor.firstname }} {{ actor.lastname }}</a>
+						</li>	
+						{% endfor %}#}
 						<li><hr class="dropdown-divider"></li>
 						<li>
-							<a class="dropdown-item" href="#">Something else here</a>
+							<a class="dropdown-item" href="/actor/">Liste des acteurs</a>
 						</li>
 					</ul>
 				</li>

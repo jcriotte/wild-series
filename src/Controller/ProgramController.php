@@ -40,11 +40,10 @@ class ProgramController extends AbstractController
             // Finally redirect to categories list
             return $this->redirectToRoute('program_index');
         }
-
         // Render the form
-        return $this->render('Program/new.html.twig', ["form" => $form->createView()]);        
-
+        return $this->render('Program/new.html.twig', ["form" => $form->createView()]);
     }
+
     /**
      * @Route("/program/", name="program_index")
      */
@@ -59,6 +58,7 @@ class ProgramController extends AbstractController
             ['programs' => $programs]
         );
     }
+
     /**
      * @Route("/program/{id}", methods={"GET"}, name="program_show", requirements={"id"="\d+"})
      */
