@@ -25,7 +25,7 @@
 						:
 						{{ episode.title }}</h3>
 					{# Lien vers la fiche de l'episode : #}
-					<a href="/program/{{ program.id }}/season/{{ season.id }}/episode/{{ episode.id }}">Voir la fiche de l'épisode</a>
+					<a href="/program/{{ program.slug }}/season/{{ season.id }}/episode/{{ episode.slug }}">Voir la fiche de l'épisode</a>
 				</div>
 			{% else %}
 				Aucune episode trouvé.
