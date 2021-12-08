@@ -24,14 +24,15 @@
 						</div>
 						<p>{{ season.year }}</p>
 						{# Lien vers la fiche de la saison : #}
-						<a href="/program/{{ program.id }}/season/{{ season.id }}">Voir la fiche</a>
+						<a href="/program/{{ program.slug }}/season/{{ season.id }}">Voir la fiche</a>
 					</div>
 				{% else %}
 					Aucune saison trouvée.
 				{% endfor %}
 			</div>
 			<div class="row">
-				<strong>Acteurs :</strong>
+				<strong>Acteurs :
+				</strong>
 				<ul>
 					{% for actor in program.actors %}
 						<li>{{ actor.firstname }}
@@ -41,6 +42,16 @@
 						<li>Aucun acteur pour cette série</li>
 					{% endfor %}
 				</ul>
+			</div>
+			<div class="row">
+				<strong>Avis :
+				</strong>
+				{% for review in reviews %}
+					<h3>{{ review.author}} {{review.note}}/10</h3>
+					<p>{{ review.reviewText }}</p>
+				{% else %}
+					<p>Aucun avis pour cette série</p>
+				{% endfor %}
 			</div>
 		</div>
 		<a href="{{ path('program_index') }}">
