@@ -11,12 +11,13 @@
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Catégories
 					</a>
-					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<ul
+						class="dropdown-menu" aria-labelledby="navbarDropdown">
 						{#{% for category in categorys %}
-							<li>
-								<a class="dropdown-item" href="/category/{{ category.id }}">{{ category.name }}</a>
-							</li>
-						{% endfor %}#}
+													<li>
+														<a class="dropdown-item" href="/category/{{ category.id }}">{{ category.name }}</a>
+													</li>
+												{% endfor %}#}
 						<li><hr class="dropdown-divider"></li>
 						<li>
 							<a class="dropdown-item" href="/category/">Liste de toutes les catégories</a>
@@ -29,12 +30,13 @@
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Acteurs
 					</a>
-					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<ul
+						class="dropdown-menu" aria-labelledby="navbarDropdown">
 						{#{% for actor in actors %}
-						<li>
-							<a class="dropdown-item" href="/actor/{{ actor.id }}">{{ actor.firstname }} {{ actor.lastname }}</a>
-						</li>	
-						{% endfor %}#}
+												<li>
+													<a class="dropdown-item" href="/actor/{{ actor.id }}">{{ actor.firstname }} {{ actor.lastname }}</a>
+												</li>	
+												{% endfor %}#}
 						<li><hr class="dropdown-divider"></li>
 						<li>
 							<a class="dropdown-item" href="/actor/">Liste des acteurs</a>
@@ -42,6 +44,16 @@
 					</ul>
 				</li>
 			</ul>
+			<div>
+				{% if app.user %}
+					{{ app.user.email }}
+					<a href="{{ path('app_logout') }}">
+						<button class="btn btn-outline-success me-2" type="button">Se déconnecter</button></a>
+				{% else %}
+					<a href="{{ path('app_login') }}">
+						<button class="btn btn-outline-success me-2" type="button">Se connecter</button></a>
+				{% endif %}
+			</div>
 			<form class="d-flex">
 				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 				<button class="btn btn-outline-success" type="submit">Search</button>

@@ -27,6 +27,9 @@
 						<td>
 							<a href="{{ path('episode_show', {'slug': episode.slug}) }}">show</a>
 							<a href="{{ path('episode_edit', {'slug': episode.slug}) }}">edit</a>
+							{% if app.user %}
+								<a href="{{ path('comment_new',) }}">ajouter un commentaire</a>
+							{% endif %}
 						</td>
 					</tr>
 				{% else %}
