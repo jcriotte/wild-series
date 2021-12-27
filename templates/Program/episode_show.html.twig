@@ -23,6 +23,10 @@
 					:
 					{{ episode.title }}</h3>
 				<p>{{ episode.synopsis }}</p>
+				{% if app.user %}
+					<a href="{{ path('comment_new') }}">Ajouter un commentaire</a>
+				{% endif %}
+				
 			</div>
 		</div>
 

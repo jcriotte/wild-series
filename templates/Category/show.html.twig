@@ -19,15 +19,16 @@
 						<p>{{ program.summary }}</p>
 						{# Lien vers la fiche de la série : #}
 						<a href="{{ path("program_show", { slug: program.slug }) }}">Voir la fiche</a>
+					{% else %}
+						Aucune série trouvée.
+					{% endfor %}
+					<div>
+						<a href="{{ path('category_index') }}">
+							Retour à la liste de toutes les catégories
+						</a>
 					</div>
-				{% else %}
-					Aucune série trouvée.
-				{% endfor %}
+				</div>
 			</div>
 		</div>
-
-		<a href="{{ path('category_index') }}">
-			Retour à la liste de toutes les catégories
-		</a>
 	</div>
-{% endblock %}
+</div>{% endblock %}

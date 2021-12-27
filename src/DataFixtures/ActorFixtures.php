@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Actor;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 class ActorFixtures extends Fixture
@@ -18,7 +19,7 @@ class ActorFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        foreach (self::ACTORS as $actor) {
+        foreach (self::ACTORS as $key => $actor) {
             $firstname = $actor['firstname'];
             $lastname = $actor['lastname'];
             $day = substr($actor['birthdate'], 0, 2);
@@ -31,6 +32,7 @@ class ActorFixtures extends Fixture
             $newActor->setLastname($lastname);
             $newActor->setBirthDate($birthdate);
             $manager->persist($newActor);
+            $this->addReference('actor_' . ($key+1), $newActor);
         }
 
         $manager->flush();

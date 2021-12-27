@@ -7,9 +7,15 @@
 
 body {
     background-color: $primary;
+    color: beige !important;
 }
 
 .iconeDuSite {
     height: 25px !important;
     width: 25px !important;
 }
+
+a, th, td{
+    color: beige !important;
+}
+

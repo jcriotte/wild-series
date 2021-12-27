@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}All reviews
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>Tous les commentaires :
+		</h1>
+		{% for review in reviews %}
+			<div>
+				<h2>{{ loop.index }}
+					/
+					{{ review.author }} écrit en date du {{ review.date }} avec une note de {{ review.note }} / 20
+					- commentaire :
+					</h2>
+				<p>{{ review.reviewText }}</p>
+				{# Lien vers la fiche de la série : #}
+				<a href="{{ path("program_show", { slug: review.program }) }}">Voir la fiche</a>
+			</div>
+		{% else %}
+			Aucun commentaire pour cette série trouvé.
+		{% endfor %}
+		<a href="{{ path('app_index') }}">
+			Retour à l'accueil
+		</a>
+	</div>
+{% endblock %}
