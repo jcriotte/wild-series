@@ -13,6 +13,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\ProgramType;
 use App\Service\Slugify;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
@@ -38,6 +40,8 @@ class ProgramController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $slug = $slugify->generate($program->getTitle());
             $program->setSlug($slug);
+            // Set the program's owner
+            $program->setOwner($this->getUser());
             // Persist Category Object
             $entityManager->persist($program);
             // Flush the persisted object
@@ -108,6 +112,32 @@ class ProgramController extends AbstractController
     {
         return $this->render('Program/episode_show.html.twig', [
             'program' => $program, 'season' => $season, 'episode' => $episode,
+        ]);
+    }
+
+    /**
+     * @Route("/program/{slug}/edit", name="program_edit", methods={"GET", "POST"})
+     */
+    public function edit(Request $request, Program $program, EntityManagerInterface $entityManager): Response
+    {
+        // Check wether the logged in user is the owner of the program
+        if (!($this->getUser() == $program->getOwner())) {
+            // If not the owner, throws a 403 Access Denied exception
+            throw new AccessDeniedException('Only the owner can edit the program!');
+        }
+
+        $form = $this->createForm(ProgramType::class, $program);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('program_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('Program/edit.html.twig', [
+            'program' => $program,
+            'form' => $form,
         ]);
     }
 }

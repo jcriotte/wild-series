@@ -16,7 +16,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             "poster" => "https://m.media-amazon.com/images/M/MV5BZmFlMTA0MmUtNWVmOC00ZmE1LWFmMDYtZTJhYjJhNGVjYTU5XkEyXkFqcGdeQXVyMTAzMDM4MjM0._V1_.jpg",
             "category_id" => 1,
             "slug" => 'Walking Dead',
-            "actors" => [1, 2, 3, 4]
+            "actors" => [1, 2, 3, 4],
+            "owner" => 0
         ],
         [
             "title" => 'The Haunting Of Hill House',
@@ -24,7 +25,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             "poster" => "https://m.media-amazon.com/images/M/MV5BMTU4NzA4MDEwNF5BMl5BanBnXkFtZTgwMTQxODYzNjM@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
             "category_id" => 1,
             "slug" => 'The Haunting Of Hill House',
-            "actors" => []
+            "actors" => [],
+            "owner" => 1
         ],
         [
             "title" => 'American Horror Story',
@@ -32,7 +34,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             "poster" => "https://m.media-amazon.com/images/M/MV5BODZlYzc2ODYtYmQyZS00ZTM4LTk4ZDQtMTMyZDdhMDgzZTU0XkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_SY1000_CR0,0,666,1000_AL_.jpg",
             "category_id" => 1,
             "slug" => 'American Horror Story',
-            "actors" => []
+            "actors" => [],
+            "owner" => 0
         ],
         [
             "title" => 'Love Death And Robots',
@@ -40,7 +43,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             "poster" => "https://m.media-amazon.com/images/M/MV5BMTc1MjIyNDI3Nl5BMl5BanBnXkFtZTgwMjQ1OTI0NzM@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
             "category_id" => 1,
             "slug" => 'Love Death And Robots',
-            "actors" => []
+            "actors" => [],
+            "owner" => 1
         ],
         [
             "title" => 'Penny Dreadful',
@@ -48,7 +52,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             "poster" => "https://m.media-amazon.com/images/M/MV5BNmE5MDE0ZmMtY2I5Mi00Y2RjLWJlYjMtODkxODQ5OWY1ODdkXkEyXkFqcGdeQXVyNjU2NjA5NjM@._V1_SY1000_CR0,0,695,1000_AL_.jpg",
             "category_id" => 1,
             "slug" => 'Penny Dreadful',
-            "actors" => []
+            "actors" => [],
+            "owner" => 0
         ],
         [
             "title" => 'Fear The Walking Dead',
@@ -56,7 +61,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             "poster" => "https://m.media-amazon.com/images/M/MV5BYWNmY2Y1NTgtYTExMS00NGUxLWIxYWQtMjU4MjNkZjZlZjQ3XkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_SY1000_CR0,0,666,1000_AL_.jpg",
             "category_id" => 1,
             "slug" => 'Fear The Walking Dead',
-            "actors" => [1]
+            "actors" => [1],
+            "owner" => 0
         ],
         [
             "title" => 'The Big Bang Theory',
@@ -64,7 +70,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             "poster" => "https://upload.wikimedia.org/wikipedia/fr/6/69/BigBangTheory_Logo.png",
             "category_id" => 5,
             "slug" => 'The Big Bang Theory',
-            "actors" => []
+            "actors" => [],
+            "owner" => 0
         ],
     ];
 
@@ -77,6 +84,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $categoryId = $program['category_id'];
             $slug = $program['slug'];
             $actors = $program['actors'];
+            $owner = $program['owner'];
 
             $newProgram = new Program();
             $newProgram->setTitle($title);
@@ -87,6 +95,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             foreach ($actors as $actor) {
                 $newProgram->addActor($this->getReference('actor_' . $actor));
             }
+            $newProgram->setOwner($this->getReference('user_' . $owner));
             $manager->persist($newProgram);
             $this->addReference('program_' . ($key+1), $newProgram);
         }
