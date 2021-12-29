@@ -48,6 +48,7 @@ class ProgramController extends AbstractController
             $entityManager->persist($program);
             // Flush the persisted object
             $entityManager->flush();
+            $this->addFlash('success', 'Une nouvelle série a bien été enregistrée');
             $email = (new Email())
                 ->from($this->getParameter('mailer_from'))
                 ->to('341c488238-075447@inbox.mailtrap.io')
@@ -139,6 +140,7 @@ class ProgramController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+            $this->addFlash('success', 'La série a bien été mise à jour');
 
             return $this->redirectToRoute('program_index', [], Response::HTTP_SEE_OTHER);
         }
