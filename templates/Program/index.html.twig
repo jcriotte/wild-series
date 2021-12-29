@@ -5,27 +5,37 @@
 
 {% block body %}
 	<div class="container">
-		<h1>Toutes les séries de la table program :
-		</h1>
-		{% for program in programs %}
-			<div>
-				<h2>{{ loop.index }}
-					/
-					{{ program.title }}
-					- Catégorie :
-					{{ program.category.name }}</h2>
-				<p>{{ program.summary }}</p>
-				{# Lien vers la fiche de la série : #}
-				<a href="{{ path("program_show", { slug: program.slug }) }}">Voir la fiche</a>
-				{% if is_granted("ROLE_ADMIN") %}
-					<a href="{{ path('program_edit', { slug: program.slug} ) }}">Éditer</a>
-				{%endif%}
-			</div>
-		{% else %}
-			Aucune série trouvée.
-		{% endfor %}
-		<a href="{{ path('app_index') }}">
-			Retour à l'accueil
-		</a>
+		<div class="title">
+			<h1>Toutes les séries de la table program :
+			</h1>
+		</div>
+		<div class="formSearch">
+			{{ form_start(form) }}
+			{{ form_widget(form) }}
+			<button>Search</button>
+			{{ form_end(form) }}
+		</div>
+		<div class="listSerie">
+			{% for program in programs %}
+				<div>
+					<h2>{{ loop.index }}
+						/
+						{{ program.title }}
+						- Catégorie :
+						{{ program.category.name }}</h2>
+					<p>{{ program.summary }}</p>
+					{# Lien vers la fiche de la série : #}
+					<a href="{{ path("program_show", { slug: program.slug }) }}">Voir la fiche</a>
+					{% if is_granted("ROLE_ADMIN") %}
+						<a href="{{ path('program_edit', { slug: program.slug} ) }}">Éditer</a>
+					{% endif %}
+				</div>
+			{% else %}
+				Aucune série trouvée.
+			{% endfor %}
+			<a href="{{ path('app_index') }}">
+				Retour à l'accueil
+			</a>
+		</div>
 	</div>
 {% endblock %}
