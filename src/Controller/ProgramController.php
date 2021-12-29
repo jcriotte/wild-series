@@ -19,6 +19,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class ProgramController extends AbstractController
 {
@@ -79,8 +80,10 @@ class ProgramController extends AbstractController
 
         return $this->render(
             'Program/index.html.twig',
-            ['programs' => $programs,
-            'form' => $form->createView()]
+            [
+                'programs' => $programs,
+                'form' => $form->createView()
+            ]
         );
     }
 
@@ -148,6 +151,27 @@ class ProgramController extends AbstractController
         return $this->renderForm('Program/edit.html.twig', [
             'program' => $program,
             'form' => $form,
+        ]);
+    }
+
+    /**
+     * @Route("/program/{id}/watchlist", name="program_watchlist", methods={"GET", "POST"})
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function addToWatchlist(Request $request, Program $program, EntityManagerInterface $entityManager): Response
+    {
+        if ($program == $this->getUser()->getWatchlist()) {
+            $this->getUser()->removeWatchlist($program);
+        } else {
+            $this->getUser()->addWatchlist($program);
+        }
+        $entityManager->flush();
+
+        $seasons = $program->getSeasons();
+        $reviews = $program->getReviews();
+
+        return $this->render('Program/show.html.twig', [
+            'program' => $program, 'seasons' => $seasons, 'reviews' => $reviews,
         ]);
     }
 }
