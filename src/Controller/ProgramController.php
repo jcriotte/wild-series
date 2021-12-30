@@ -160,7 +160,8 @@ class ProgramController extends AbstractController
      */
     public function addToWatchlist(Request $request, Program $program, EntityManagerInterface $entityManager): Response
     {
-        if ($program == $this->getUser()->getWatchlist()) {
+        // code pour la quete 25.1
+        if ($this->getUser()->isInWatchlist($program)) {
             $this->getUser()->removeWatchlist($program);
         } else {
             $this->getUser()->addWatchlist($program);
@@ -173,5 +174,11 @@ class ProgramController extends AbstractController
         return $this->render('Program/show.html.twig', [
             'program' => $program, 'seasons' => $seasons, 'reviews' => $reviews,
         ]);
+        // fin code pour la quete 25.1
+        // code pour la quete 25.2
+        //return $this->json([
+        //    'isInWatchlist' => $this->getUser()->isInWatchlist($program)
+        //]);
+        // fin code pour la quete 25.2
     }
 }
