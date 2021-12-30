@@ -14,10 +14,10 @@
 					<ul
 						class="dropdown-menu" aria-labelledby="navbarDropdown">
 						{#{% for category in categorys %}
-													<li>
-														<a class="dropdown-item" href="/category/{{ category.id }}">{{ category.name }}</a>
-													</li>
-												{% endfor %}#}
+																									<li>
+																										<a class="dropdown-item" href="/category/{{ category.id }}">{{ category.name }}</a>
+																									</li>
+																								{% endfor %}#}
 						<li><hr class="dropdown-divider"></li>
 						<li>
 							<a class="dropdown-item" href="/category/">Liste de toutes les catégories</a>
@@ -33,10 +33,10 @@
 					<ul
 						class="dropdown-menu" aria-labelledby="navbarDropdown">
 						{#{% for actor in actors %}
-												<li>
-													<a class="dropdown-item" href="/actor/{{ actor.id }}">{{ actor.firstname }} {{ actor.lastname }}</a>
-												</li>	
-												{% endfor %}#}
+																								<li>
+																									<a class="dropdown-item" href="/actor/{{ actor.id }}">{{ actor.firstname }} {{ actor.lastname }}</a>
+																								</li>	
+																								{% endfor %}#}
 						<li><hr class="dropdown-divider"></li>
 						<li>
 							<a class="dropdown-item" href="/actor/">Liste des acteurs</a>
@@ -46,18 +46,38 @@
 			</ul>
 			<div>
 				{% if app.user %}
-					{{ app.user.email }}
+					{% trans with {'%username%': app.user.email} %}
+					hello_username
+					{% endtrans %}
+					!
 					<a href="{{ path('app_logout') }}">
-						<button class="btn btn-outline-success me-2" type="button">Se déconnecter</button></a>
+						<button class="btn btn-outline-success me-2" type="button">
+							{{ 'account.logout'|trans }}</button>
+					</a>
 				{% else %}
 					<a href="{{ path('app_login') }}">
-						<button class="btn btn-outline-success me-2" type="button">Se connecter</button></a>
+						<button class="btn btn-outline-success me-2" type="button">
+							{{ 'account.login'|trans }}</button>
+					</a>
 				{% endif %}
 			</div>
 			<form class="d-flex">
 				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 				<button class="btn btn-outline-success" type="submit">Search</button>
 			</form>
+			<div class="" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Fr
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li>En</li>
+							<li>Fr</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </nav>
