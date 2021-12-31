@@ -11,13 +11,8 @@
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Catégories
 					</a>
-					<ul
-						class="dropdown-menu" aria-labelledby="navbarDropdown">
-						{#{% for category in categorys %}
-																									<li>
-																										<a class="dropdown-item" href="/category/{{ category.id }}">{{ category.name }}</a>
-																									</li>
-																								{% endfor %}#}
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+						{{ render(controller('App\\Controller\\HomeController::navbarTopCategory')) }}
 						<li><hr class="dropdown-divider"></li>
 						<li>
 							<a class="dropdown-item" href="/category/">Liste de toutes les catégories</a>
@@ -30,13 +25,8 @@
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Acteurs
 					</a>
-					<ul
-						class="dropdown-menu" aria-labelledby="navbarDropdown">
-						{#{% for actor in actors %}
-																								<li>
-																									<a class="dropdown-item" href="/actor/{{ actor.id }}">{{ actor.firstname }} {{ actor.lastname }}</a>
-																								</li>	
-																								{% endfor %}#}
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+						{{ render(controller('App\\Controller\\HomeController::navbarTopActor')) }}
 						<li><hr class="dropdown-divider"></li>
 						<li>
 							<a class="dropdown-item" href="/actor/">Liste des acteurs</a>
