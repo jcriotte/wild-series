@@ -6,6 +6,7 @@ use App\Entity\Program;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use DateTime;
 
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -96,6 +97,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
                 $newProgram->addActor($this->getReference('actor_' . $actor));
             }
             $newProgram->setOwner($this->getReference('user_' . $owner));
+            $newProgram->setUpdatedAt(new DateTime('now'));
             $manager->persist($newProgram);
             $this->addReference('program_' . ($key+1), $newProgram);
         }
